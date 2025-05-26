@@ -11,7 +11,7 @@ class PromptManager:
         if prompts_dir is None:
             # Get the prompts directory relative to this file
             current_file = Path(__file__)
-            self.prompts_dir = current_file.parent.parent.parent / "prompts"
+            self.prompts_dir = current_file.parent.parent / "prompts"
         else:
             self.prompts_dir = Path(prompts_dir)
         

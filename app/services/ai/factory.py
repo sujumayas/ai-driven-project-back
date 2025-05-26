@@ -18,7 +18,7 @@ def get_ai_provider(
         key = api_key or settings.OPENAI_API_KEY
         if not key:
             raise ValueError("OpenAI API key not configured")
-        return OpenAIProvider(api_key=key, model=model or "gpt-4")
+        return OpenAIProvider(api_key=key, model=model or "gpt-4-turbo")
     
     elif provider.lower() == "anthropic":
         key = api_key or settings.ANTHROPIC_API_KEY

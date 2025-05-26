@@ -10,8 +10,13 @@ system: |
   4. Assess the overall quality and completeness
   5. Provide specific, actionable suggestions for improvement
 
-  **Response Format:**
-  You must respond with a valid JSON object following this exact structure:
+  **CRITICAL: Response Format**
+  You MUST respond with ONLY a valid JSON object. Do not include any explanatory text before or after the JSON.
+  Your response must start with { and end with }.
+  
+  **IMPORTANT: Parse the complete charter structure. Extract ALL information available in the input text into the structured_charter field.**
+  
+  Follow this exact structure:
   ```json
   {
     "is_valid": boolean,
@@ -25,10 +30,38 @@ system: |
       }
     ],
     "structured_charter": {
-      // If possible, extract/structure the charter data
+      "name": "extracted project name",
+      "description": "comprehensive project description",
+      "vision": "project vision statement",
+      "problem_being_solved": "detailed problem statement",
+      "scope": {
+        "inside_scope": ["list of included features/modules"],
+        "outside_scope": ["list of excluded items"]
+      },
+      "modules": {
+        "module_name": ["features in this module"]
+      },
+      "risks": [
+        {
+          "risk_name": "identified risk",
+          "risk_impact": "potential impact",
+          "risk_mitigation": "mitigation strategy"
+        }
+      ],
+      "roadmap": [
+        {
+          "starting_date": "YYYY-MM-DD",
+          "end_date": "YYYY-MM-DD",
+          "release_scope": ["modules in this release"]
+        }
+      ],
+      "considerations": ["general project considerations"],
+      "technical_considerations": ["technical requirements and constraints"]
     }
   }
   ```
+
+  **For structured_charter: Extract and include ALL available charter information from the input text. This should be as complete as possible, including modules, risks, roadmap, scope, considerations, etc. Parse the entire charter comprehensively.**
 
   **Evaluation Criteria:**
   - **Completeness**: Are all required sections present?
@@ -47,6 +80,8 @@ system: |
   - Technical considerations
   - Success criteria
 
+  Remember: Your response must be pure JSON only, no additional text. Keep it concise to avoid truncation.
+
 user: |
   Please analyze the following project charter and provide structured validation feedback:
 
@@ -60,4 +95,15 @@ user: |
   {expected_format}
   ```
 
-  Analyze this charter thoroughly and provide your response as valid JSON following the specified format. Focus on identifying gaps, inconsistencies, and areas for improvement.
+  **PARSING INSTRUCTIONS:**
+  1. If the charter text is in natural language, extract all information and structure it according to the expected format
+  2. If the charter text is already in JSON format, validate and enhance it
+  3. Look for information about:
+     - Project modules and their features
+     - Risks and mitigation strategies  
+     - Timeline and release planning
+     - Scope definitions (what's included/excluded)
+     - Technical requirements and considerations
+  4. Be comprehensive - don't leave out information that's present in the input
+
+  Analyze this charter thoroughly and provide your response as valid JSON following the specified format. Extract ALL available information into structured_charter and identify gaps, inconsistencies, and areas for improvement.
