@@ -118,10 +118,11 @@ async def delete_project(
 
 @router.post("/validate-charter", response_model=CharterValidationResponse)
 async def validate_charter(
-    charter_text: str
+    request: dict
 ):
     """Validate project charter using AI (simulated for now)"""
     try:
+        charter_text = request.get("charter_text", "")
         validation_result = ProjectService.validate_charter(charter_text)
         return CharterValidationResponse(**validation_result)
     except Exception as e:
