@@ -2,8 +2,12 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.core.database import engine
+from app.core.logging_config import configure_logging
 from app.models import Base
 from app.api import projects, charter, test
+
+# Configure logging
+configure_logging()
 
 app = FastAPI(
     title="AI-Driven Project Flow API",
