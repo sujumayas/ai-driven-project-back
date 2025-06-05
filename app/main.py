@@ -4,7 +4,7 @@ from app.core.config import settings
 from app.core.database import engine
 from app.core.logging_config import configure_logging
 from app.models import Base
-from app.api import projects, charter, test
+from app.api import projects, charter, test, releases
 
 # Configure logging
 configure_logging()
@@ -45,4 +45,5 @@ async def health_check():
 # Include API routes
 app.include_router(projects.router, prefix="/api/v1")
 app.include_router(charter.router, prefix="/api/v1")
+app.include_router(releases.router, prefix="/api/v1")
 app.include_router(test.router, prefix="/api/v1")
